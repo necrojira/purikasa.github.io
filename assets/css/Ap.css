@@ -1,0 +1,642 @@
+/* ================= GLOBALES ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  color: #1a1a1a;
+  background-color: #fff;
+  line-height: 1.5;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 130px;
+  height: auto;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2B91AD;
+  letter-spacing: 2px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #2B91AD;
+}
+
+.nav-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.icon-link {
+  text-decoration: none;
+  font-size: 20px;
+  color: #333;
+}
+
+/* ================= HERO BANNER - CORREGIDO ================= */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 60px;
+  position: relative;
+  overflow: hidden;
+  min-height: 550px;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+/* Imagen de fondo borrosa - AHORA CUBRE COMPLETAMENTE */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background-image: url("../img/fondo.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  filter: blur(10px);
+  transform: scale(1.1);
+  z-index: 0;
+}
+
+/* Capa oscura encima de la imagen borrosa */
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+
+.hero-content,
+.hero-image {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Título principal - MÁS GRANDE Y DESTACADO */
+.hero-title {
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 25px;
+  color: #ffffff;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+}
+
+/* Lista de características */
+.hero-features {
+  list-style: none;
+  margin: 25px 0;
+  padding: 0;
+}
+
+.hero-features li {
+  color: #ffffff;
+  font-size: 18px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.hero-features li i {
+  color: #2B91AD;
+  font-size: 20px;
+  width: 25px;
+}
+
+/* Precio destacado */
+.hero-price {
+  font-size: 42px;
+  font-weight: bold;
+  color: #FFD700;
+  margin: 20px 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-price small {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+/* Texto de instalación */
+.hero-install {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 15px 0;
+  background: rgba(43, 145, 173, 0.8);
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 30px;
+}
+
+/* Botones */
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 35px;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary {
+  background: #2B91AD;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.btn-primary:hover {
+  background: #237a91;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #2B91AD;
+  border: 2px solid #2B91AD;
+  background: rgba(255,255,255,0.95);
+}
+
+.btn-secondary:hover {
+  background: #2B91AD;
+  color: white;
+  transform: translateY(-3px);
+}
+
+.hero-image {
+  flex: 1;
+  text-align: center;
+  min-width: 280px;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  max-height: 380px;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
+  border-radius: 15px;
+}
+
+/* ================= CARRUSEL ================= */
+.slider-section {
+  padding: 50px 0;
+  background: #fff;
+  overflow: hidden;
+  width: 100%;
+}
+
+.slider-title {
+  text-align: center;
+  font-size: 32px;
+  color: #2B91AD;
+  margin-bottom: 30px;
+}
+
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider {
+  width: 100%;
+  overflow: visible;
+  cursor: pointer;
+  touch-action: pan-y pinch-zoom;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.slide-track {
+  display: flex;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.slide {
+  flex-shrink: 0;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+  pointer-events: none;
+  transform: translateZ(0);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ================= PLANES DE ESTUDIO ================= */
+.study-plans-banner {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.study-plans-banner h2 {
+  font-size: 2rem;
+  color: #2B91AD;
+}
+
+.study-plans-banner p {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+.courses-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.courses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+/* ================= ACORDEÓN ================= */
+.accordion-item {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 20px auto;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  cursor: pointer;
+  background: white;
+  transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+  background: #f5f5f5;
+}
+
+.accordion-header .course-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.accordion-header .course-content {
+  flex: 1;
+  padding: 0;
+}
+
+.accordion-header .course-content h2 {
+  margin: 0 0 10px 0;
+  color: #2B91AD;
+}
+
+.accordion-header .course-content p {
+  margin: 0;
+  color: #666;
+}
+
+.accordion-icon {
+  font-size: 24px;
+  color: #2B91AD;
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #f8f9fa;
+}
+
+.accordion-item.active .accordion-content {
+  max-height: 2000px;
+  overflow-y: auto;
+}
+
+.filters-list {
+  padding: 20px;
+}
+
+.filters-list h3 {
+  color: #2B91AD;
+  margin-bottom: 15px;
+}
+
+.filters-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.filters-list li {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.filters-list li:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.filters-list li img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.filters-list li div {
+  flex: 1;
+}
+
+.filters-list li strong {
+  display: block;
+  font-size: 1rem;
+  color: #333;
+}
+
+.filters-list li p {
+  margin: 5px 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.filters-list .price {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2B91AD;
+}
+
+.btn-comprar {
+  background: #2B91AD;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-comprar:hover {
+  background: #237a91;
+  transform: translateY(-2px);
+}
+
+/* ================= FOOTER ================= */
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  background-color: #1a2a3a;
+  color: #fff;
+  margin-top: 40px;
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+/* ================= RESPONSIVE ================= */
+/* PC Escritorio */
+@media (min-width: 1200px) {
+  .hero {
+    padding: 100px 80px;
+    min-height: 600px;
+  }
+  
+  .hero-title {
+    font-size: 68px;
+  }
+  
+  .hero-features li {
+    font-size: 20px;
+  }
+  
+  .hero-price {
+    font-size: 48px;
+  }
+}
+
+/* Tablets y iPads */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero {
+    padding: 50px 40px;
+    min-height: 480px;
+  }
+  
+  .hero-title {
+    font-size: 42px;
+  }
+  
+  .hero-features li {
+    font-size: 16px;
+  }
+  
+  .hero-price {
+    font-size: 36px;
+  }
+  
+  .hero-install {
+    font-size: 16px;
+  }
+  
+  .hero-image img {
+    max-height: 280px;
+  }
+}
+
+/* Móviles */
+@media (max-width: 767px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+    min-height: auto;
+  }
+  
+  .hero-title {
+    font-size: 32px;
+  }
+  
+  .hero-features li {
+    font-size: 14px;
+    justify-content: center;
+  }
+  
+  .hero-price {
+    font-size: 32px;
+  }
+  
+  .hero-install {
+    font-size: 14px;
+  }
+  
+  .hero-buttons {
+    justify-content: center;
+  }
+  
+  .btn {
+    padding: 12px 25px;
+    font-size: 14px;
+  }
+  
+  .hero-image img {
+    max-height: 220px;
+  }
+  
+  .slider-title {
+    font-size: 24px;
+  }
+  
+  .accordion-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .accordion-header .course-image {
+    width: 100%;
+    height: 150px;
+  }
+  
+  .filters-list li {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .filters-list li img {
+    width: 100%;
+    height: 100px;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 26px;
+  }
+  
+  .hero-features li {
+    font-size: 12px;
+  }
+  
+  .hero-price {
+    font-size: 28px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+  
+  .hero-image img {
+    max-height: 180px;
+  }
+}
+
+/* Orientación landscape en móviles */
+@media (max-width: 800px) and (orientation: landscape) {
+  .hero {
+    flex-direction: row;
+    padding: 30px 20px;
+  }
+  
+  .hero-title {
+    font-size: 28px;
+  }
+  
+  .hero-image img {
+    max-height: 160px;
+  }
+}

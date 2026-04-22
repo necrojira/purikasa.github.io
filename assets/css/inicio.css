@@ -52,7 +52,7 @@ body {
   text-decoration: none;
   color: #333;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
   transition: color 0.3s;
 }
 
@@ -186,7 +186,7 @@ body {
 .hero-image img {
   max-width: 100%;
   height: auto;
-  max-height: 380px;
+  max-height: 560px;
   filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
   border-radius: 15px;
 }
@@ -232,8 +232,7 @@ body {
 .slide img {
   width: 100%;
   height: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }

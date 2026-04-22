@@ -89,7 +89,17 @@ document.addEventListener('DOMContentLoaded', function() {
       
       slideTrack.style.transform = `translateX(${currentPosition}px)`;
     }
-    
+    //clonar el carrousel
+    function cloneSlides() {
+  const slidesOriginales = document.querySelectorAll('.slide');
+  
+  slidesOriginales.forEach(slide => {
+    const clone = slide.cloneNode(true);
+    clone.classList.add('clone');
+    slideTrack.appendChild(clone);
+  });
+}
+
     // Iniciar carrusel
     function startCarousel() {
       if (intervalId) clearInterval(intervalId);

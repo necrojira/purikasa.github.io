@@ -1,4 +1,4 @@
-// script.js - Con animación suave y carrusel mejorado para móvil
+// script.js - Carrusel infinito
 
 document.addEventListener('DOMContentLoaded', function() {
   
@@ -11,19 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
     header.addEventListener('click', function(e) {
       if (e.target.closest('.btn-comprar')) return;
       
-      // Cerrar otros acordeones
       accordionItems.forEach(otherItem => {
         if (otherItem !== item && otherItem.classList.contains('active')) {
           otherItem.classList.remove('active');
         }
       });
       
-      // Alternar el actual
       item.classList.toggle('active');
     });
   });
   
-  // ================= CARRUSEL MEJORADO PARA MÓVIL =================
+  // ================= CARRUSEL INFINITO =================
   const sliderContainer = document.querySelector('.slider-container');
   const slider = document.querySelector('.slider');
   const slideTrack = document.querySelector('.slide-track');
@@ -36,18 +34,25 @@ document.addEventListener('DOMContentLoaded', function() {
     let speed = 0.5;
     let isPlaying = true;
     let totalOriginales = slides.length;
+    let isTransitioning = false;
     
-    // Detectar si es móvil
-    const isMobile = window.innerWidth <= 768;
+    // Clonar slides para loop infinito
+    function initSlides() {
+      const slidesOriginales = document.querySelectorAll('.slide');
+      slidesOriginales.forEach(slide => {
+        const clone = slide.cloneNode(true);
+        clone.classList.add('clone');
+        slideTrack.appendChild(clone);
+      });
+    }
+    initSlides();
     
-    // Velocidad más lenta en móvil
     function getSpeed() {
       if (window.innerWidth <= 480) return 0.3;
       if (window.innerWidth <= 768) return 0.4;
       return 0.5;
     }
     
-    // Cuántas slides mostrar
     function getSlidesToShow() {
       const width = window.innerWidth;
       if (width <= 480) return 1;
@@ -56,59 +61,49 @@ document.addEventListener('DOMContentLoaded', function() {
       return 4;
     }
     
-    // Calcular ancho de cada slide
     function calculateSlideWidth() {
       if (!sliderContainer) return;
       const containerWidth = sliderContainer.clientWidth;
       const slidesToShow = getSlidesToShow();
       slideWidth = containerWidth / slidesToShow;
       
-      slides.forEach(slide => {
+      const allSlides = slideTrack.querySelectorAll('.slide');
+      allSlides.forEach(slide => {
         slide.style.width = `${slideWidth}px`;
         slide.style.flex = `0 0 ${slideWidth}px`;
-        // Altura automática manteniendo proporción
         slide.style.height = 'auto';
       });
       
       if (slideTrack) {
-        slideTrack.style.width = `${slideWidth * slides.length}px`;
+        slideTrack.style.width = `${slideWidth * allSlides.length}px`;
       }
     }
     
-    // Mover carrusel
     function moveCarousel() {
       if (!isPlaying) return;
-      if (!slideTrack) return;
       
-      const anchoTotalOriginales = slideWidth * totalOriginales;
+      const limite = slideWidth * totalOriginales;
+      
       currentPosition -= speed;
       
-      if (Math.abs(currentPosition) >= anchoTotalOriginales) {
+      // Reset instantáneo sin transición para loop infinito
+      if (Math.abs(currentPosition) >= limite) {
         currentPosition = 0;
+        slideTrack.style.transition = 'none';
+      } else {
+        slideTrack.style.transition = 'transform 0.3s linear';
       }
       
       slideTrack.style.transform = `translateX(${currentPosition}px)`;
     }
-    //clonar el carrousel
-    function cloneSlides() {
-  const slidesOriginales = document.querySelectorAll('.slide');
-  
-  slidesOriginales.forEach(slide => {
-    const clone = slide.cloneNode(true);
-    clone.classList.add('clone');
-    slideTrack.appendChild(clone);
-  });
-}
-
-    // Iniciar carrusel
+    
     function startCarousel() {
       if (intervalId) clearInterval(intervalId);
       isPlaying = true;
       speed = getSpeed();
-      intervalId = setInterval(moveCarousel, 30);
+      intervalId = setInterval(moveCarousel, 16);
     }
     
-    // Detener carrusel
     function stopCarousel() {
       if (intervalId) {
         clearInterval(intervalId);
@@ -117,34 +112,34 @@ document.addEventListener('DOMContentLoaded', function() {
       isPlaying = false;
     }
     
-    // Reiniciar carrusel
     function refreshCarousel() {
       stopCarousel();
       slides = document.querySelectorAll('.slide');
-      totalOriginales = document.querySelectorAll('.slide:not(.clone)').length;
+      totalOriginales = slides.length;
+      
+      // Remover clones anteriores
+      slideTrack.querySelectorAll('.clone').forEach(clone => clone.remove());
+      initSlides();
+      
       calculateSlideWidth();
       currentPosition = 0;
-      if (slideTrack) {
-        slideTrack.style.transform = `translateX(0px)`;
-      }
+      slideTrack.style.transition = 'none';
+      slideTrack.style.transform = `translateX(0px)`;
       speed = getSpeed();
       startCarousel();
     }
     
-    // Eventos para pausar/reanudar
     slider.addEventListener('mouseenter', stopCarousel);
     slider.addEventListener('mouseleave', startCarousel);
     slider.addEventListener('touchstart', stopCarousel, { passive: true });
     slider.addEventListener('touchend', startCarousel);
     
-    // Evento de redimensionamiento
     let resizeTimeout;
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(refreshCarousel, 200);
     });
     
-    // Inicializar
     calculateSlideWidth();
     startCarousel();
   }

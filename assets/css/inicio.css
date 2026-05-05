@@ -65,7 +65,7 @@ body {
   gap: 15px;
 }
 
-/* ================= HERO BANNER ================= */
+/* ================= HERO BANNER (no usado) ================= */
 .hero {
   display: flex;
   justify-content: space-between;
@@ -442,7 +442,7 @@ footer p {
   }
   
   .hero-image img {
-    max-height: 220px;
+    max-height: 350px;
   }
   
   /* Ajuste en móvil para títulos de filtros */

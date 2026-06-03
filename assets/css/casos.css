@@ -317,31 +317,4 @@ footer p {
   .hero-title {
     font-size: 32px;
   }
-  
-  .slide-track {
-    animation: scroll 90s linear infinite;
-  }
-  
-  
-
-
-/* Feedback visual para toque en celular */
-@media (max-width: 413px) {
-  .slider {
-    transition: opacity 0.2s ease;
-    cursor: pointer;
-  }
-  
-  .slider:active {
-    opacity: 0.8;
-  }
-  
-  /* Mejorar área táctil */
-  .slide {
-    padding: 0 3px;
-  }
-  
-  .slide img {
-    pointer-events: none;
-  }
-}}
+}
